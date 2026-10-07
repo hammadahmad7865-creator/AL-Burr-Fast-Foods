@@ -19,23 +19,29 @@ jobs:
         with:
           node-version: 22
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android
+        uses: android-actions/setup-android@v4
+
+      - name: Install Android SDK
+        run: |
+          sdkmanager "platform-tools"
+          sdkmanager "platforms;android-35"
+          sdkmanager "build-tools;35.0.0"
+
       - name: Install Bubblewrap
         run: npm install -g @bubblewrap/cli
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v4
-        with:
-          packages: 'platform-tools'
-
-      - name: Install Android SDK packages
-        run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
-
-      - name: Create TWA project
+      - name: Create Bubblewrap Project
         run: |
           mkdir twa
           cd twa
-          bubblewrap init \
+          yes | bubblewrap init \
             --manifest="https://hammadahmad7865-creator.github.io/Al-Burr-Fast-Food/manifest.json"
 
       - name: Build APK
