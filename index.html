@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,53 +16,58 @@
         }
 
         body {
-            background: #f3f3f3;
+            background: #f2f2f2;
             min-height: 100vh;
         }
 
         .app {
-            max-width: 500px;
-            min-height: 100vh;
+            max-width: 520px;
             margin: auto;
+            min-height: 100vh;
             background: white;
-            padding: 25px 20px;
         }
 
-        .logo {
+        /* HEADER */
+
+        .header {
+            background: #111;
+            padding: 15px;
             text-align: center;
-            margin: 10px auto 25px;
         }
 
-        .logo img {
-            width: 180px;
-            height: 180px;
+        .header img {
+            width: 110px;
+            height: 110px;
             object-fit: contain;
         }
 
-        .welcome {
+        .header h1 {
+            color: white;
+            font-size: 25px;
+            margin-top: 5px;
+        }
+
+        .header p {
+            color: #ffb000;
+            margin-top: 4px;
+        }
+
+        /* CUSTOMER SCREEN */
+
+        .customer-screen {
+            padding: 25px 20px;
+        }
+
+        .customer-screen h2 {
             text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .welcome h1 {
             color: #d71920;
-            font-size: 28px;
-            margin-bottom: 6px;
-        }
-
-        .welcome p {
-            color: #555;
-            font-size: 15px;
-        }
-
-        .form-box {
-            margin-top: 15px;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
             font-weight: bold;
+            margin-bottom: 7px;
             color: #333;
         }
 
@@ -69,9 +75,9 @@
         textarea {
             width: 100%;
             padding: 14px;
-            margin-bottom: 18px;
             border: 1px solid #ddd;
             border-radius: 10px;
+            margin-bottom: 18px;
             font-size: 16px;
             outline: none;
         }
@@ -86,67 +92,428 @@
             border-color: #d71920;
         }
 
-        .continue-btn {
+        .main-btn {
             width: 100%;
-            padding: 15px;
             border: none;
-            border-radius: 10px;
             background: #d71920;
             color: white;
+            padding: 15px;
+            border-radius: 10px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
+        }
+
+        /* MENU */
+
+        .menu-screen {
+            display: none;
+            padding: 15px;
+        }
+
+        .menu-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .menu-title h2 {
+            color: #d71920;
+            font-size: 27px;
+        }
+
+        .menu-title p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .category-title {
+            background: #111;
+            color: #ffb000;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 20px 0 12px;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .item {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: white;
+            box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+        }
+
+        .item-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .sizes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .size-btn {
+            border: 1px solid #d71920;
+            background: white;
+            color: #d71920;
+            border-radius: 8px;
+            padding: 10px 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .size-btn:hover {
+            background: #d71920;
+            color: white;
+        }
+
+        /* CART */
+
+        .cart-box {
+            margin-top: 25px;
+            background: #111;
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .cart-box h2 {
+            color: #ffb000;
+            margin-bottom: 12px;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #444;
+            padding: 10px 0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .total {
+            font-size: 21px;
+            font-weight: bold;
+            color: #ffb000;
+            margin-top: 15px;
+        }
+
+        .order-btn {
+            width: 100%;
+            border: none;
+            background: #d71920;
+            color: white;
+            padding: 14px;
+            border-radius: 9px;
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .empty {
+            color: #ccc;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="app">
+<div class="app">
 
-        <div class="logo">
-            <img src="al-burr-logo.png" alt="AL BURR FAST FOOD">
+    <!-- HEADER -->
+
+    <div class="header">
+        <img src="al-burr-logo.png" alt="AL BURR">
+        <h1>AL BURR</h1>
+        <p>FAST FOOD & PIZZA</p>
+    </div>
+
+
+    <!-- CUSTOMER DETAILS -->
+
+    <div class="customer-screen" id="customerScreen">
+
+        <h2>ڈیلیوری کی معلومات</h2>
+
+        <label>آپ کا نام</label>
+        <input
+            type="text"
+            id="customerName"
+            placeholder="اپنا نام لکھیں">
+
+        <label>فون نمبر</label>
+        <input
+            type="tel"
+            id="customerPhone"
+            placeholder="03XXXXXXXXX">
+
+        <label>ڈیلیوری کا پتہ</label>
+        <textarea
+            id="customerAddress"
+            placeholder="اپنا مکمل پتہ لکھیں"></textarea>
+
+        <button class="main-btn" onclick="openMenu()">
+            مینو دیکھیں
+        </button>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu-screen" id="menuScreen">
+
+        <div class="menu-title">
+            <h2>🍕 ہمارا مینو</h2>
+            <p>اپنی پسند کا کھانا منتخب کریں</p>
         </div>
 
-        <div class="welcome">
-            <h1>AL BURR</h1>
-            <p>FAST FOOD & PIZZA</p>
+
+        <!-- SPECIAL PIZZA -->
+
+        <div class="category-title">
+            🍕 Special Pizza
         </div>
 
-        <div class="form-box">
+        <div class="item">
 
-            <label>آپ کا نام</label>
-            <input type="text" id="name" placeholder="اپنا نام لکھیں">
+            <div class="item-name">
+                AL BURR Special Pizza
+            </div>
 
-            <label>فون نمبر</label>
-            <input type="tel" id="phone" placeholder="03XXXXXXXXX">
+            <div class="sizes">
 
-            <label>ڈیلیوری کا پتہ</label>
-            <textarea id="address" placeholder="اپنا مکمل پتہ لکھیں"></textarea>
+                <button class="size-btn"
+                    onclick="addToCart('AL BURR Special Pizza - Small', 450)">
+                    Small<br>Rs. 450
+                </button>
 
-            <button class="continue-btn" onclick="continueOrder()">
-                آرڈر شروع کریں
+                <button class="size-btn"
+                    onclick="addToCart('AL BURR Special Pizza - Medium', 900)">
+                    Medium<br>Rs. 900
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('AL BURR Special Pizza - Large', 1200)">
+                    Large<br>Rs. 1200
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('AL BURR Special Pizza - XL', 1800)">
+                    XL<br>Rs. 1800
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- NEW PIZZA -->
+
+        <div class="category-title">
+            🍕 AL BURR New Pizza Arrival
+        </div>
+
+        <div class="item">
+
+            <div class="item-name">
+                New Pizza
+            </div>
+
+            <div class="sizes">
+
+                <button class="size-btn"
+                    onclick="addToCart('New Pizza - Small', 350)">
+                    Small<br>Rs. 350
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('New Pizza - Medium', 800)">
+                    Medium<br>Rs. 800
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('New Pizza - Large', 1100)">
+                    Large<br>Rs. 1100
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('New Pizza - XL', 1600)">
+                    XL<br>Rs. 1600
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- STUFFER PIZZA -->
+
+        <div class="category-title">
+            🍕 Stuffer Pizza
+        </div>
+
+        <div class="item">
+
+            <div class="item-name">
+                Stuffer Pizza
+            </div>
+
+            <div class="sizes">
+
+                <button class="size-btn"
+                    onclick="addToCart('Stuffer Pizza - Small', 500)">
+                    Small<br>Rs. 500
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('Stuffer Pizza - Medium', 950)">
+                    Medium<br>Rs. 950
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('Stuffer Pizza - Large', 1250)">
+                    Large<br>Rs. 1250
+                </button>
+
+                <button class="size-btn"
+                    onclick="addToCart('Stuffer Pizza - XL', 1800)">
+                    XL<br>Rs. 1800
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CART -->
+
+        <div class="cart-box">
+
+            <h2>🛒 آپ کا کارٹ</h2>
+
+            <div id="cartItems">
+                <div class="empty">
+                    ابھی کوئی آئٹم منتخب نہیں کیا گیا۔
+                </div>
+            </div>
+
+            <div class="total">
+                کل: Rs. <span id="cartTotal">0</span>
+            </div>
+
+            <button class="order-btn" onclick="confirmOrder()">
+                آرڈر جاری رکھیں
             </button>
 
         </div>
 
     </div>
 
-    <script>
-        function continueOrder() {
+</div>
 
-            let name = document.getElementById("name").value;
-            let phone = document.getElementById("phone").value;
-            let address = document.getElementById("address").value;
 
-            if (name === "" || phone === "" || address === "") {
-                alert("براہ کرم تمام معلومات مکمل کریں۔");
-                return;
-            }
+<script>
 
-            alert("خوش آمدید " + name + "!");
+    let cart = [];
+
+    function openMenu() {
+
+        let name = document.getElementById("customerName").value.trim();
+        let phone = document.getElementById("customerPhone").value.trim();
+        let address = document.getElementById("customerAddress").value.trim();
+
+        if (name === "" || phone === "" || address === "") {
+
+            alert("براہ کرم نام، فون نمبر اور پتہ مکمل کریں۔");
+
+            return;
         }
-    </script>
+
+        document.getElementById("customerScreen").style.display = "none";
+
+        document.getElementById("menuScreen").style.display = "block";
+
+        window.scrollTo(0, 0);
+    }
+
+
+    function addToCart(name, price) {
+
+        cart.push({
+            name: name,
+            price: price
+        });
+
+        updateCart();
+
+        alert(name + " کارٹ میں شامل کر دیا گیا ہے۔");
+    }
+
+
+    function updateCart() {
+
+        let cartItems = document.getElementById("cartItems");
+
+        let total = 0;
+
+        cartItems.innerHTML = "";
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML =
+                '<div class="empty">ابھی کوئی آئٹم منتخب نہیں کیا گیا۔</div>';
+
+        } else {
+
+            cart.forEach(function(item, index) {
+
+                total += item.price;
+
+                let div = document.createElement("div");
+
+                div.className = "cart-item";
+
+                div.innerHTML =
+                    (index + 1) +
+                    ". " +
+                    item.name +
+                    " — Rs. " +
+                    item.price;
+
+                cartItems.appendChild(div);
+
+            });
+
+        }
+
+        document.getElementById("cartTotal").textContent = total;
+    }
+
+
+    function confirmOrder() {
+
+        if (cart.length === 0) {
+
+            alert("براہ کرم پہلے کوئی آئٹم منتخب کریں۔");
+
+            return;
+        }
+
+        alert(
+            "آپ کا آرڈر تیار ہے!\n\n" +
+            "اگلے مرحلے میں ہم آرڈر کی تصدیق اور WhatsApp کا نظام بنائیں گے۔"
+        );
+    }
+
+</script>
 
 </body>
 </html>
