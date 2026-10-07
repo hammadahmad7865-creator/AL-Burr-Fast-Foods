@@ -29,11 +29,23 @@ jobs:
           sdkmanager "platforms;android-35"
           sdkmanager "build-tools;35.0.0"
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
       - name: Create Android Project
         run: |
           mkdir -p app/src/main/java/com/alburr/fastfood
-          mkdir -p app/src/main/res/layout
+          mkdir -p app/src/main/res/drawable
+          mkdir -p app/src/main/res/mipmap-hdpi
+          mkdir -p app/src/main/res/mipmap-mdpi
+          mkdir -p app/src/main/res/mipmap-xhdpi
+          mkdir -p app/src/main/res/mipmap-xxhdpi
+          mkdir -p app/src/main/res/mipmap-xxxhdpi
           mkdir -p app/src/main/res/values
+
+          cp al-burr-logo.png app/src/main/res/drawable/al_burr_logo.png
 
           cat > settings.gradle <<'EOF'
           pluginManagement {
@@ -81,6 +93,17 @@ jobs:
           }
           EOF
 
+          cat > app/src/main/res/values/styles.xml <<'EOF'
+          <resources>
+              <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+                  <item name="android:fontFamily">sans</item>
+                  <item name="android:colorAccent">#ff3d00</item>
+                  <item name="android:navigationBarColor">#070707</item>
+                  <item name="android:statusBarColor">#070707</item>
+              </style>
+          </resources>
+          EOF
+
           cat > app/src/main/AndroidManifest.xml <<'EOF'
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -89,6 +112,8 @@ jobs:
               <application
                   android:theme="@style/AppTheme"
                   android:label="AL Burr Fast Food"
+                  android:icon="@drawable/al_burr_logo"
+                  android:roundIcon="@drawable/al_burr_logo"
                   android:usesCleartextTraffic="true">
 
                   <activity
@@ -105,17 +130,6 @@ jobs:
               </application>
 
           </manifest>
-          EOF
-
-          cat > app/src/main/res/values/styles.xml <<'EOF'
-          <resources>
-              <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
-                  <item name="android:fontFamily">sans</item>
-                  <item name="android:colorAccent">#ff3d00</item>
-                  <item name="android:navigationBarColor">#070707</item>
-                  <item name="android:statusBarColor">#070707</item>
-              </style>
-          </resources>
           EOF
 
           cat > app/src/main/java/com/alburr/fastfood/MainActivity.java <<'EOF'
@@ -150,14 +164,9 @@ jobs:
           }
           EOF
 
-      - name: Create Gradle Wrapper
-        run: |
-          gradle wrapper --gradle-version 8.9
-
       - name: Build APK
         run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
