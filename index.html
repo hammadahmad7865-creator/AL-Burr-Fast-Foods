@@ -892,6 +892,88 @@ function updateCart(){
 
     let total = 0;
 
+            cart.forEach(function(item){
+
+            total += item.price;
+
+            let row =
+                document.createElement("div");
+
+            row.className = "cartRow";
+
+            row.innerHTML =
+                item.name + " — Rs. " + item.price;
+
+            itemsBox.appendChild(row);
+
+        });
+
+        totalBox.textContent = total;
+    }
+
+
+/* ================= WHATSAPP ORDER ================= */
+
+document
+.getElementById("orderButton")
+.addEventListener("click", function(){
+
+    if(cart.length === 0){
+
+        alert("Please add something to cart.");
+
+        return;
+    }
+
+    let total = 0;
+
+    let message =
+        "AL BURR FAST FOOD ORDER%0A%0A";
+
+    message +=
+        "Name: " + customerName + "%0A";
+
+    message +=
+        "Phone: " + customerPhone + "%0A";
+
+    message +=
+        "Address: " + customerAddress + "%0A%0A";
+
+    message +=
+        "ORDER:%0A";
+
     cart.forEach(function(item){
 
-        total += item
+        message +=
+            "- " +
+            item.name +
+            " — Rs. " +
+            item.price +
+            "%0A";
+
+        total += item.price;
+
+    });
+
+    message +=
+        "%0ATotal: Rs. " + total;
+
+    let whatsappNumber =
+        "923070000166";
+
+    let whatsappURL =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        message;
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+});
+</script>
+
+</body>
+</html>
