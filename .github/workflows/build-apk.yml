@@ -42,7 +42,7 @@ jobs:
           mkdir twa
           cd twa
           yes | bubblewrap init \
-            --manifest="https://hammadahmad7865-creator.github.io/Al-Burr-Fast-Food/manifest.json"
+            --manifest="https://hammadahmad7865-creator.github.io/AL-Burr-Fast-Foods/manifest.json"
 
       - name: Build APK
         working-directory: twa
