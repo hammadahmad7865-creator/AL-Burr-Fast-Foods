@@ -14,18 +14,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Setup Java
+      - name: Setup Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Setup Android
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v4
 
       - name: Install Android SDK
@@ -37,20 +37,51 @@ jobs:
       - name: Install Bubblewrap
         run: npm install -g @bubblewrap/cli
 
-      - name: Create Bubblewrap Project
+      - name: Create TWA manifest
         run: |
-          mkdir twa
-          cd twa
-          yes | bubblewrap init \
-            --manifest="https://hammadahmad7865-creator.github.io/AL-Burr-Fast-Foods/manifest.json"
+          mkdir -p twa
+          cat > twa/twa-manifest.json <<'EOF'
+          {
+            "packageId": "com.alburr.fastfood",
+            "host": "hammadahmad7865-creator.github.io",
+            "name": "AL Burr Fast Food",
+            "launcherName": "AL Burr",
+            "display": "standalone",
+            "orientation": "portrait",
+            "themeColor": "#080808",
+            "navigationColor": "#080808",
+            "navigationColorDark": "#080808",
+            "backgroundColor": "#070707",
+            "startUrl": "/AL-Burr-Fast-Foods/",
+            "iconUrl": "https://hammadahmad7865-creator.github.io/AL-Burr-Fast-Foods/al-burr-logo.png",
+            "maskableIconUrl": "https://hammadahmad7865-creator.github.io/AL-Burr-Fast-Foods/al-burr-logo.png",
+            "splashScreenFadeOutDuration": 300,
+            "appVersionName": "1.0.0",
+            "appVersionCode": 1,
+            "minSdkVersion": 23,
+            "signingKey": {
+              "alias": "alburr",
+              "path": "android.keystore"
+            }
+          }
+          EOF
+
+      - name: Generate Android project
+        working-directory: twa
+        run: |
+          bubblewrap update \
+            --manifest="./twa-manifest.json" \
+            --skipVersionUpgrade
 
       - name: Build APK
         working-directory: twa
         run: |
-          bubblewrap build --skipPwaValidation
+          bubblewrap build \
+            --skipPwaValidation \
+            --skipSigning
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: AL-Burr-Fast-Food-APK
-          path: twa/*.apk
+          path: twa/app-release-unsigned.apk
