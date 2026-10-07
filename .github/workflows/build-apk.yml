@@ -1,0 +1,55 @@
+name: Build AL Burr Fast Food APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Bubblewrap
+        run: npm install -g @bubblewrap/cli
+
+      - name: Setup Android
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK
+        run: |
+          sdkmanager "platform-tools"
+          sdkmanager "platforms;android-35"
+          sdkmanager "build-tools;35.0.0"
+
+      - name: Download PWA manifest
+        run: |
+          curl -L "https://hammadahmad7865-creator.github.io/Al-Burr-Fast-Food/manifest.json" -o manifest.json
+          cat manifest.json
+
+      - name: Create TWA project
+        run: |
+          mkdir twa
+          cd twa
+          bubblewrap init \
+            --manifest="https://hammadahmad7865-creator.github.io/Al-Burr-Fast-Food/manifest.json"
+
+      - name: Build APK
+        working-directory: twa
+        run: |
+          bubblewrap build --skipPwaValidation
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AL-Burr-Fast-Food-APK
+          path: twa/*.apk
