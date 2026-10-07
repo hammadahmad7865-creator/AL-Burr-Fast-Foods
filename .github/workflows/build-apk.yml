@@ -137,6 +137,8 @@ jobs:
 
           import android.app.Activity;
           import android.os.Bundle;
+          import android.content.Intent;
+          import android.net.Uri;
           import android.webkit.WebSettings;
           import android.webkit.WebView;
           import android.webkit.WebViewClient;
@@ -155,7 +157,41 @@ jobs:
                   settings.setDomStorageEnabled(true);
                   settings.setSupportZoom(false);
 
-                  webView.setWebViewClient(new WebViewClient());
+                  webView.setWebViewClient(new WebViewClient() {
+
+                      @Override
+                      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                          if (url.startsWith("whatsapp://")) {
+                              try {
+                                  Intent intent = new Intent(
+                                      Intent.ACTION_VIEW,
+                                      Uri.parse(url)
+                                  );
+                                  startActivity(intent);
+                              } catch (Exception e) {
+
+                                  String fallbackUrl = url.replace(
+                                      "whatsapp://send/",
+                                      "https://wa.me/"
+                                  );
+
+                                  try {
+                                      Intent browserIntent = new Intent(
+                                          Intent.ACTION_VIEW,
+                                          Uri.parse(fallbackUrl)
+                                      );
+                                      startActivity(browserIntent);
+                                  } catch (Exception ignored) {
+                                  }
+                              }
+
+                              return true;
+                          }
+
+                          return false;
+                      }
+                  });
 
                   webView.loadUrl(
                       "https://hammadahmad7865-creator.github.io/AL-Burr-Fast-Foods/"
