@@ -17,24 +17,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install Bubblewrap
         run: npm install -g @bubblewrap/cli
 
-      - name: Setup Android
-        uses: android-actions/setup-android@v3
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools'
 
-      - name: Install Android SDK
+      - name: Install Android SDK packages
         run: |
-          sdkmanager "platform-tools"
-          sdkmanager "platforms;android-35"
-          sdkmanager "build-tools;35.0.0"
-
-      - name: Download PWA manifest
-        run: |
-          curl -L "https://hammadahmad7865-creator.github.io/Al-Burr-Fast-Food/manifest.json" -o manifest.json
-          cat manifest.json
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Create TWA project
         run: |
