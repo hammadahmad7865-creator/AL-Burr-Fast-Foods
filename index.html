@@ -18,7 +18,7 @@ body{
     color:white;
 }
 
-/* DASHBOARD */
+/* ================= DASHBOARD ================= */
 
 #dashboard{
     min-height:100vh;
@@ -108,12 +108,12 @@ textarea:focus{
     font-weight:bold;
 }
 
-/* MENU */
+/* ================= MENU ================= */
 
 #menu{
     display:none;
     min-height:100vh;
-    padding:20px 15px 100px;
+    padding:20px 15px 140px;
     background:
     radial-gradient(circle at top,#401800,#080808 50%);
 }
@@ -131,6 +131,7 @@ textarea:focus{
     overflow:hidden;
     background:white;
     border:5px solid white;
+    box-shadow:0 10px 35px #000;
 }
 
 .menuLogo img{
@@ -147,16 +148,21 @@ textarea:focus{
     color:#ffc400;
 }
 
+/* ================= CATEGORY ================= */
+
 .category{
-    max-width:900px;
-    margin:30px auto;
+    max-width:950px;
+    margin:35px auto;
 }
 
 .category h2{
     padding:15px;
     border-radius:15px;
     background:linear-gradient(135deg,#ffb800,#ff4500);
+    box-shadow:0 8px 20px #000;
 }
+
+/* ================= PRODUCTS ================= */
 
 .products{
     display:grid;
@@ -167,18 +173,35 @@ textarea:focus{
 .product{
     background:#171717;
     border-radius:20px;
-    padding:15px;
+    padding:12px;
     text-align:center;
     box-shadow:0 10px 25px #000;
+    border:1px solid #292929;
+    overflow:hidden;
 }
 
 .food{
+    width:100%;
+    height:145px;
+    border-radius:15px;
+    overflow:hidden;
+    background:#252525;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     font-size:65px;
-    padding:15px;
+}
+
+.food img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .product h3{
-    margin:5px 0;
+    margin:12px 0 5px;
+    font-size:16px;
+    min-height:38px;
 }
 
 .price{
@@ -193,28 +216,38 @@ textarea:focus{
     padding:12px;
     border:0;
     border-radius:12px;
-    background:#ff9800;
+    background:linear-gradient(135deg,#ffb300,#ff6500);
+    color:#111;
     font-weight:bold;
+    cursor:pointer;
 }
 
-/* CART */
+.add:active{
+    transform:scale(.96);
+}
+
+/* ================= CART ================= */
 
 #cart{
     position:fixed;
     bottom:10px;
     left:10px;
     right:10px;
+    max-width:600px;
+    margin:auto;
     padding:15px;
     border-radius:18px;
     background:#111;
     border:1px solid #555;
     box-shadow:0 10px 30px #000;
     display:none;
+    z-index:999;
 }
 
 #cartItems{
     max-height:130px;
     overflow:auto;
+    margin-top:8px;
 }
 
 .cartRow{
@@ -244,13 +277,17 @@ textarea:focus{
     }
 
     .food{
+        height:120px;
         font-size:50px;
     }
 
     .product h3{
-        font-size:15px;
+        font-size:14px;
     }
 
+    .price{
+        font-size:17px;
+    }
 }
 </style>
 </head>
@@ -258,9 +295,9 @@ textarea:focus{
 <body>
 
 
-<!-- =========================
+<!-- =================================================
      DASHBOARD
-========================= -->
+================================================= -->
 
 <div id="dashboard">
 
@@ -308,9 +345,9 @@ textarea:focus{
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      MENU
-========================= -->
+================================================= -->
 
 <div id="menu">
 
@@ -327,7 +364,7 @@ textarea:focus{
     </div>
 
 
-    <!-- PIZZA -->
+    <!-- ================= PIZZA ================= -->
 
     <div class="category">
 
@@ -336,55 +373,172 @@ textarea:focus{
         <div class="products">
 
             <div class="product">
-                <div class="food">🍕</div>
+                <div class="food">
+                    <img src="menu-1.jpg" alt="Special Pizza">
+                </div>
                 <h3>Special Pizza - Small</h3>
                 <div class="price">Rs. 450</div>
                 <button class="add"
-                data-name="Special Pizza Small"
-                data-price="450">
-                ADD TO CART
+                    data-name="Special Pizza Small"
+                    data-price="450">
+                    ADD TO CART
                 </button>
             </div>
 
             <div class="product">
-                <div class="food">🍕</div>
+                <div class="food">
+                    <img src="menu-1.jpg" alt="Special Pizza">
+                </div>
                 <h3>Special Pizza - Medium</h3>
                 <div class="price">Rs. 900</div>
                 <button class="add"
-                data-name="Special Pizza Medium"
-                data-price="900">
-                ADD TO CART
+                    data-name="Special Pizza Medium"
+                    data-price="900">
+                    ADD TO CART
                 </button>
             </div>
 
             <div class="product">
-                <div class="food">🍕</div>
+                <div class="food">
+                    <img src="menu-1.jpg" alt="Special Pizza">
+                </div>
                 <h3>Special Pizza - Large</h3>
                 <div class="price">Rs. 1200</div>
                 <button class="add"
-                data-name="Special Pizza Large"
-                data-price="1200">
-                ADD TO CART
+                    data-name="Special Pizza Large"
+                    data-price="1200">
+                    ADD TO CART
                 </button>
             </div>
 
             <div class="product">
-                <div class="food">🍕</div>
+                <div class="food">
+                    <img src="menu-1.jpg" alt="Special Pizza">
+                </div>
                 <h3>Special Pizza - XL</h3>
                 <div class="price">Rs. 1800</div>
                 <button class="add"
-                data-name="Special Pizza XL"
-                data-price="1800">
-                ADD TO CART
+                    data-name="Special Pizza XL"
+                    data-price="1800">
+                    ADD TO CART
+                </button>
+            </div>
+
+
+            <!-- NEW PIZZA -->
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-2.jpg" alt="New Pizza">
+                </div>
+                <h3>AL BURR New Pizza - Small</h3>
+                <div class="price">Rs. 350</div>
+                <button class="add"
+                    data-name="AL BURR New Pizza Small"
+                    data-price="350">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-2.jpg" alt="New Pizza">
+                </div>
+                <h3>AL BURR New Pizza - Medium</h3>
+                <div class="price">Rs. 800</div>
+                <button class="add"
+                    data-name="AL BURR New Pizza Medium"
+                    data-price="800">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-2.jpg" alt="New Pizza">
+                </div>
+                <h3>AL BURR New Pizza - Large</h3>
+                <div class="price">Rs. 1100</div>
+                <button class="add"
+                    data-name="AL BURR New Pizza Large"
+                    data-price="1100">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-2.jpg" alt="New Pizza">
+                </div>
+                <h3>AL BURR New Pizza - XL</h3>
+                <div class="price">Rs. 1600</div>
+                <button class="add"
+                    data-name="AL BURR New Pizza XL"
+                    data-price="1600">
+                    ADD TO CART
+                </button>
+            </div>
+
+
+            <!-- STUFFER PIZZA -->
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-3.jpg" alt="Stuffer Pizza">
+                </div>
+                <h3>Stuffer Pizza - Small</h3>
+                <div class="price">Rs. 500</div>
+                <button class="add"
+                    data-name="Stuffer Pizza Small"
+                    data-price="500">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-3.jpg" alt="Stuffer Pizza">
+                </div>
+                <h3>Stuffer Pizza - Medium</h3>
+                <div class="price">Rs. 950</div>
+                <button class="add"
+                    data-name="Stuffer Pizza Medium"
+                    data-price="950">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-3.jpg" alt="Stuffer Pizza">
+                </div>
+                <h3>Stuffer Pizza - Large</h3>
+                <div class="price">Rs. 1250</div>
+                <button class="add"
+                    data-name="Stuffer Pizza Large"
+                    data-price="1250">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-3.jpg" alt="Stuffer Pizza">
+                </div>
+                <h3>Stuffer Pizza - XL</h3>
+                <div class="price">Rs. 1800</div>
+                <button class="add"
+                    data-name="Stuffer Pizza XL"
+                    data-price="1800">
+                    ADD TO CART
                 </button>
             </div>
 
         </div>
-
     </div>
 
 
-    <!-- BURGER -->
+    <!-- ================= BURGER ================= -->
 
     <div class="category">
 
@@ -393,35 +547,36 @@ textarea:focus{
         <div class="products">
 
             <div class="product">
-                <div class="food">🍔</div>
+                <div class="food">
+                    <img src="menu-4.jpg" alt="Burger">
+                </div>
                 <h3>Zinger Burger</h3>
                 <div class="price">Rs. 350</div>
-
                 <button class="add"
-                data-name="Zinger Burger"
-                data-price="350">
-                ADD TO CART
+                    data-name="Zinger Burger"
+                    data-price="350">
+                    ADD TO CART
                 </button>
             </div>
 
             <div class="product">
-                <div class="food">🍔</div>
+                <div class="food">
+                    <img src="menu-4.jpg" alt="Burger">
+                </div>
                 <h3>AL Burr Special Burger</h3>
                 <div class="price">Rs. 300</div>
-
                 <button class="add"
-                data-name="AL Burr Special Burger"
-                data-price="300">
-                ADD TO CART
+                    data-name="AL Burr Special Burger"
+                    data-price="300">
+                    ADD TO CART
                 </button>
             </div>
 
         </div>
-
     </div>
 
 
-    <!-- SHAWARMA -->
+    <!-- ================= SHAWARMA ================= -->
 
     <div class="category">
 
@@ -430,35 +585,36 @@ textarea:focus{
         <div class="products">
 
             <div class="product">
-                <div class="food">🌯</div>
+                <div class="food">
+                    <img src="menu-4.jpg" alt="Shawarma">
+                </div>
                 <h3>Chicken Shawarma</h3>
                 <div class="price">Rs. 150</div>
-
                 <button class="add"
-                data-name="Chicken Shawarma"
-                data-price="150">
-                ADD TO CART
+                    data-name="Chicken Shawarma"
+                    data-price="150">
+                    ADD TO CART
                 </button>
             </div>
 
             <div class="product">
-                <div class="food">🌯</div>
+                <div class="food">
+                    <img src="menu-4.jpg" alt="Shawarma">
+                </div>
                 <h3>Zinger Shawarma</h3>
                 <div class="price">Rs. 200</div>
-
                 <button class="add"
-                data-name="Zinger Shawarma"
-                data-price="200">
-                ADD TO CART
+                    data-name="Zinger Shawarma"
+                    data-price="200">
+                    ADD TO CART
                 </button>
             </div>
 
         </div>
-
     </div>
 
 
-    <!-- SANDWICH -->
+    <!-- ================= SANDWICH ================= -->
 
     <div class="category">
 
@@ -467,39 +623,154 @@ textarea:focus{
         <div class="products">
 
             <div class="product">
-                <div class="food">🥪</div>
+                <div class="food">
+                    <img src="menu-5.jpg" alt="Sandwich">
+                </div>
                 <h3>Chicken Sandwich</h3>
                 <div class="price">Rs. 250</div>
-
                 <button class="add"
-                data-name="Chicken Sandwich"
-                data-price="250">
-                ADD TO CART
+                    data-name="Chicken Sandwich"
+                    data-price="250">
+                    ADD TO CART
                 </button>
             </div>
 
             <div class="product">
-                <div class="food">🥪</div>
+                <div class="food">
+                    <img src="menu-5.jpg" alt="Sandwich">
+                </div>
                 <h3>Club Sandwich</h3>
                 <div class="price">Rs. 250</div>
-
                 <button class="add"
-                data-name="Club Sandwich"
-                data-price="250">
-                ADD TO CART
+                    data-name="Club Sandwich"
+                    data-price="250">
+                    ADD TO CART
                 </button>
             </div>
 
         </div>
+    </div>
 
+
+    <!-- ================= ROLLS ================= -->
+
+    <div class="category">
+
+        <h2>🌯 ROLLS</h2>
+
+        <div class="products">
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-5.jpg" alt="Roll">
+                </div>
+                <h3>Chicken Roll</h3>
+                <div class="price">Rs. 180</div>
+                <button class="add"
+                    data-name="Chicken Roll"
+                    data-price="180">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-5.jpg" alt="Roll">
+                </div>
+                <h3>Zinger Roll</h3>
+                <div class="price">Rs. 220</div>
+                <button class="add"
+                    data-name="Zinger Roll"
+                    data-price="220">
+                    ADD TO CART
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ================= PASTA ================= -->
+
+    <div class="category">
+
+        <h2>🍝 PASTA</h2>
+
+        <div class="products">
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-3.jpg" alt="Pasta">
+                </div>
+                <h3>Chicken Pasta</h3>
+                <div class="price">Rs. 350</div>
+                <button class="add"
+                    data-name="Chicken Pasta"
+                    data-price="350">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-3.jpg" alt="Pasta">
+                </div>
+                <h3>Special Pasta</h3>
+                <div class="price">Rs. 400</div>
+                <button class="add"
+                    data-name="Special Pasta"
+                    data-price="400">
+                    ADD TO CART
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ================= FRIES ================= -->
+
+    <div class="category">
+
+        <h2>🍟 FRIES & SNACKS</h2>
+
+        <div class="products">
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-5.jpg" alt="Fries">
+                </div>
+                <h3>French Fries</h3>
+                <div class="price">Rs. 180</div>
+                <button class="add"
+                    data-name="French Fries"
+                    data-price="180">
+                    ADD TO CART
+                </button>
+            </div>
+
+            <div class="product">
+                <div class="food">
+                    <img src="menu-5.jpg" alt="Snacks">
+                </div>
+                <h3>Loaded Fries</h3>
+                <div class="price">Rs. 300</div>
+                <button class="add"
+                    data-name="Loaded Fries"
+                    data-price="300">
+                    ADD TO CART
+                </button>
+            </div>
+
+        </div>
     </div>
 
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      CART
-========================= -->
+================================================= -->
 
 <div id="cart">
 
@@ -520,18 +791,14 @@ textarea:focus{
 
 <script>
 
-/* =========================
-   CUSTOMER DATA
-========================= */
+/* ================= CUSTOMER DATA ================= */
 
 let customerName = "";
 let customerPhone = "";
 let customerAddress = "";
 
 
-/* =========================
-   NEXT BUTTON
-========================= */
+/* ================= NEXT BUTTON ================= */
 
 document
 .getElementById("nextButton")
@@ -546,7 +813,6 @@ document
     customerAddress =
         document.getElementById("address").value.trim();
 
-
     if(
         customerName === "" ||
         customerPhone === "" ||
@@ -560,29 +826,20 @@ document
         return;
     }
 
-
-    /* Dashboard hide */
-
     document
     .getElementById("dashboard")
     .style.display = "none";
 
-
-    /* Menu show */
-
     document
     .getElementById("menu")
     .style.display = "block";
-
 
     window.scrollTo(0,0);
 
 });
 
 
-/* =========================
-   CART
-========================= */
+/* ================= CART ================= */
 
 let cart = [];
 
@@ -599,12 +856,10 @@ document
         let price =
             Number(button.getAttribute("data-price"));
 
-
         cart.push({
             name:name,
             price:price
         });
-
 
         updateCart();
 
@@ -624,7 +879,6 @@ function updateCart(){
     let totalBox =
         document.getElementById("total");
 
-
     if(cart.length === 0){
 
         cartBox.style.display = "none";
@@ -632,123 +886,12 @@ function updateCart(){
         return;
     }
 
-
     cartBox.style.display = "block";
-
 
     itemsBox.innerHTML = "";
 
-
     let total = 0;
-
 
     cart.forEach(function(item){
 
-        total += item.price;
-
-
-        let row =
-            document.createElement("div");
-
-        row.className = "cartRow";
-
-        row.innerHTML =
-            item.name +
-            " — Rs. " +
-            item.price;
-
-        itemsBox.appendChild(row);
-
-    });
-
-
-    totalBox.innerText = total;
-
-}
-
-
-/* =========================
-   WHATSAPP
-========================= */
-
-document
-.getElementById("orderButton")
-.addEventListener("click", function(){
-
-    if(cart.length === 0){
-
-        alert("Please add an item first.");
-
-        return;
-    }
-
-
-    let message =
-        "AL BURR FAST FOOD ORDER\n\n";
-
-
-    message +=
-        "Name: " +
-        customerName +
-        "\n";
-
-
-    message +=
-        "Phone: " +
-        customerPhone +
-        "\n";
-
-
-    message +=
-        "Address: " +
-        customerAddress +
-        "\n\n";
-
-
-    message +=
-        "ORDER:\n";
-
-
-    let total = 0;
-
-
-    cart.forEach(function(item,index){
-
-        message +=
-            (index + 1) +
-            ". " +
-            item.name +
-            " - Rs. " +
-            item.price +
-            "\n";
-
-
-        total += item.price;
-
-    });
-
-
-    message +=
-        "\nTOTAL: Rs. " +
-        total;
-
-
-    let whatsapp =
-        "923070000166";
-
-
-    let url =
-        "https://wa.me/" +
-        whatsapp +
-        "?text=" +
-        encodeURIComponent(message);
-
-
-    window.location.href = url;
-
-});
-
-</script>
-
-</body>
-</html>
+        total += item
