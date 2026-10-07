@@ -2,978 +2,2272 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AL BURR FAST FOOD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#080808">
+<title>AL Burr Fast Food</title>
 
 <style>
 *{
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent
+}
+
+html{
+scroll-behavior:smooth
 }
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#080808;
-    color:white;
+font-family:Arial,Helvetica,sans-serif;
+background:
+radial-gradient(circle at top left,#3b0a0a 0%,transparent 35%),
+radial-gradient(circle at bottom right,#5b1500 0%,transparent 35%),
+#070707;
+color:#fff;
+min-height:100vh;
+overflow-x:hidden
 }
 
-/* ================= DASHBOARD ================= */
+button{
+font-family:inherit;
+border:none;
+cursor:pointer
+}
+
+.hidden{
+display:none!important
+}
+
+/* DASHBOARD */
 
 #dashboard{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:
-    radial-gradient(circle at top,#572000,#080808 55%);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+position:relative;
+overflow:hidden
 }
 
-.box{
-    width:100%;
-    max-width:430px;
-    padding:28px 22px;
-    border-radius:28px;
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.2);
-    box-shadow:0 20px 60px rgba(0,0,0,.7);
+.bg-circle{
+position:absolute;
+border-radius:50%;
+opacity:.35;
+animation:float 7s ease-in-out infinite
 }
 
-.logo{
-    width:120px;
-    height:120px;
-    margin:0 auto 20px;
-    border-radius:50%;
-    overflow:hidden;
-    background:white;
-    border:4px solid white;
-    box-shadow:0 10px 30px #000;
+.circle1{
+width:240px;
+height:240px;
+background:#ff3c00;
+top:-100px;
+left:-80px
 }
 
-.logo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.circle2{
+width:300px;
+height:300px;
+background:#b30000;
+bottom:-150px;
+right:-100px;
+animation-delay:2s
 }
 
-h1{
-    text-align:center;
-    margin:10px 0 5px;
-    font-size:28px;
+@keyframes float{
+0%,100%{
+transform:translateY(0) scale(1)
+}
+50%{
+transform:translateY(-25px) scale(1.08)
+}
 }
 
-.sub{
-    text-align:center;
-    color:#ffc400;
-    margin-bottom:25px;
+.start-card{
+width:100%;
+max-width:430px;
+padding:28px 22px 25px;
+background:rgba(20,20,20,.78);
+border:1px solid rgba(255,255,255,.12);
+border-radius:30px;
+backdrop-filter:blur(18px);
+box-shadow:
+0 25px 60px rgba(0,0,0,.6),
+inset 0 1px rgba(255,255,255,.08);
+position:relative;
+z-index:2;
+animation:cardIn .8s ease
 }
 
-label{
-    display:block;
-    margin:12px 0 7px;
-    font-weight:bold;
+@keyframes cardIn{
+from{
+opacity:0;
+transform:translateY(40px) scale(.94)
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1)
+}
 }
 
-input,
-textarea{
-    width:100%;
-    padding:15px;
-    border:1px solid #555;
-    border-radius:14px;
-    background:#151515;
-    color:white;
-    outline:none;
+.logo-wrap{
+width:155px;
+height:155px;
+margin:0 auto 15px;
+border-radius:50%;
+padding:8px;
+background:linear-gradient(145deg,#ff6500,#b00000,#ff8a00);
+box-shadow:
+0 0 35px rgba(255,70,0,.45),
+0 12px 30px rgba(0,0,0,.6);
+animation:logoFloat 3.5s ease-in-out infinite
 }
 
-textarea{
-    height:90px;
-    resize:none;
+@keyframes logoFloat{
+0%,100%{
+transform:translateY(0) rotate(0deg)
+}
+50%{
+transform:translateY(-9px) rotate(2deg)
+}
 }
 
-input:focus,
-textarea:focus{
-    border-color:#ffb000;
+.logo-wrap img{
+width:100%;
+height:100%;
+object-fit:contain;
+border-radius:50%;
+background:#111
 }
 
-#nextButton{
-    width:100%;
-    margin-top:20px;
-    padding:16px;
-    border:0;
-    border-radius:15px;
-    background:linear-gradient(135deg,#ffc400,#ff4500);
-    color:white;
-    font-size:18px;
-    font-weight:bold;
+.brand{
+text-align:center;
+font-size:29px;
+font-weight:900;
+letter-spacing:2px;
+margin-bottom:5px
 }
 
-/* ================= MENU ================= */
-
-#menu{
-    display:none;
-    min-height:100vh;
-    padding:20px 15px 140px;
-    background:
-    radial-gradient(circle at top,#401800,#080808 50%);
+.brand span,
+.top-brand-text span{
+color:#ff5a00
 }
 
-.menuHead{
-    text-align:center;
-    padding:20px;
+.tagline{
+text-align:center;
+color:#aaa;
+font-size:13px;
+margin-bottom:25px
 }
 
-.menuLogo{
-    width:130px;
-    height:130px;
-    margin:auto;
-    border-radius:50%;
-    overflow:hidden;
-    background:white;
-    border:5px solid white;
-    box-shadow:0 10px 35px #000;
+.input-box{
+margin-bottom:15px
 }
 
-.menuLogo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.input-box label{
+display:block;
+color:#ddd;
+font-size:13px;
+margin:0 0 7px 5px
 }
 
-.menuHead h2{
-    margin:15px 0 5px;
+.input-box input,
+.input-box textarea{
+width:100%;
+background:rgba(255,255,255,.06);
+color:#fff;
+border:1px solid rgba(255,255,255,.13);
+border-radius:15px;
+padding:15px;
+outline:none;
+font-size:15px;
+transition:.25s
 }
 
-.menuHead p{
-    color:#ffc400;
+.input-box textarea{
+resize:none;
+height:85px
 }
 
-/* ================= CATEGORY ================= */
-
-.category{
-    max-width:950px;
-    margin:35px auto;
+.input-box input:focus,
+.input-box textarea:focus{
+border-color:#ff5900;
+box-shadow:0 0 0 3px rgba(255,89,0,.12)
 }
 
-.category h2{
-    padding:15px;
-    border-radius:15px;
-    background:linear-gradient(135deg,#ffb800,#ff4500);
-    box-shadow:0 8px 20px #000;
+.next-btn{
+width:100%;
+margin-top:5px;
+padding:16px;
+border-radius:16px;
+background:linear-gradient(135deg,#ff7100,#d80000);
+color:#fff;
+font-size:17px;
+font-weight:900;
+letter-spacing:1px;
+box-shadow:0 10px 25px rgba(255,60,0,.25);
+transition:.25s
 }
 
-/* ================= PRODUCTS ================= */
+.next-btn:active{
+transform:scale(.97)
+}
 
-.products{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
+.shop-phone{
+text-align:center;
+color:#999;
+font-size:12px;
+margin-top:15px
+}
+
+.shop-phone strong{
+color:#ff6500
+}
+
+/* APP */
+
+#app{
+min-height:100vh;
+padding-bottom:82px
+}
+
+.topbar{
+position:sticky;
+top:0;
+z-index:50;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:14px 16px;
+background:rgba(7,7,7,.88);
+backdrop-filter:blur(15px);
+border-bottom:1px solid rgba(255,255,255,.08)
+}
+
+.top-brand{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.top-logo{
+width:43px;
+height:43px;
+border-radius:50%;
+object-fit:contain;
+background:#111;
+border:2px solid #ff5200;
+box-shadow:0 0 14px rgba(255,70,0,.3)
+}
+
+.top-brand-text{
+font-size:17px;
+font-weight:900
+}
+
+.shop-call{
+color:#aaa;
+font-size:11px;
+margin-left:4px
+}
+
+.cart-top{
+min-width:45px;
+height:45px;
+border-radius:14px;
+background:rgba(255,255,255,.07);
+color:#fff;
+font-size:21px;
+position:relative
+}
+
+.cart-count{
+position:absolute;
+top:-5px;
+right:-5px;
+min-width:20px;
+height:20px;
+padding:0 5px;
+border-radius:20px;
+background:#ff4d00;
+color:#fff;
+font-size:11px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold
+}
+
+.page{
+padding:18px 15px;
+animation:pageIn .35s ease
+}
+
+@keyframes pageIn{
+from{
+opacity:0;
+transform:translateY(12px)
+}
+to{
+opacity:1;
+transform:translateY(0)
+}
+}
+
+.welcome{
+padding:18px;
+border-radius:23px;
+background:
+linear-gradient(
+135deg,
+rgba(255,70,0,.18),
+rgba(255,255,255,.04)
+);
+border:1px solid rgba(255,255,255,.09);
+margin-bottom:22px
+}
+
+.welcome small{
+color:#aaa;
+font-size:12px
+}
+
+.welcome h2{
+margin-top:5px;
+font-size:23px
+}
+
+.welcome p{
+color:#aaa;
+margin-top:6px;
+font-size:13px
+}
+
+.call-shop{
+display:inline-block;
+margin-top:10px;
+color:#ff6500;
+font-size:12px;
+font-weight:bold
+}
+
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:25px 2px 13px
+}
+
+.section-title h2{
+font-size:20px
+}
+
+.section-title span{
+color:#ff5a00;
+font-size:12px;
+font-weight:bold
+}
+
+/* PRODUCT CARDS */
+
+.product-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:13px
 }
 
 .product{
-    background:#171717;
-    border-radius:20px;
-    padding:12px;
-    text-align:center;
-    box-shadow:0 10px 25px #000;
-    border:1px solid #292929;
-    overflow:hidden;
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.09),
+rgba(255,255,255,.025)
+);
+border:1px solid rgba(255,255,255,.09);
+border-radius:21px;
+overflow:hidden;
+box-shadow:
+0 12px 25px rgba(0,0,0,.35),
+inset 0 1px rgba(255,255,255,.05);
+transition:.25s;
+position:relative
 }
 
-.food{
-    width:100%;
-    height:145px;
-    border-radius:15px;
-    overflow:hidden;
-    background:#252525;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:65px;
+.product:active{
+transform:scale(.97)
 }
 
-.food img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.product-img{
+width:100%;
+height:145px;
+object-fit:cover;
+display:block;
+background:#181818
 }
 
-.product h3{
-    margin:12px 0 5px;
-    font-size:16px;
-    min-height:38px;
+.product-content{
+padding:11px
 }
 
-.price{
-    color:#ffc400;
-    font-size:20px;
-    font-weight:bold;
-    margin:10px;
+.product-name{
+font-size:14px;
+font-weight:800;
+line-height:1.3;
+min-height:36px
 }
 
-.add{
-    width:100%;
-    padding:12px;
-    border:0;
-    border-radius:12px;
-    background:linear-gradient(135deg,#ffb300,#ff6500);
-    color:#111;
-    font-weight:bold;
-    cursor:pointer;
+.product-price{
+color:#ff6900;
+font-size:16px;
+font-weight:900;
+margin:8px 0
 }
 
-.add:active{
-    transform:scale(.96);
+.add-btn{
+width:100%;
+padding:10px 7px;
+border-radius:11px;
+background:linear-gradient(135deg,#ff6900,#d60000);
+color:#fff;
+font-size:12px;
+font-weight:900
 }
 
-/* ================= CART ================= */
-
-#cart{
-    position:fixed;
-    bottom:10px;
-    left:10px;
-    right:10px;
-    max-width:600px;
-    margin:auto;
-    padding:15px;
-    border-radius:18px;
-    background:#111;
-    border:1px solid #555;
-    box-shadow:0 10px 30px #000;
-    display:none;
-    z-index:999;
+.size-badge{
+position:absolute;
+top:8px;
+left:8px;
+padding:5px 8px;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(5px);
+border-radius:9px;
+font-size:10px;
+font-weight:bold
 }
 
-#cartItems{
-    max-height:130px;
-    overflow:auto;
-    margin-top:8px;
+/* MENUS */
+
+.menu-gallery{
+display:grid;
+grid-template-columns:1fr;
+gap:16px
 }
 
-.cartRow{
-    padding:7px 0;
-    border-bottom:1px solid #333;
+.menu-image-card{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.09);
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 15px 30px rgba(0,0,0,.35)
 }
 
-#orderButton{
-    width:100%;
-    margin-top:10px;
-    padding:14px;
-    border:0;
-    border-radius:12px;
-    background:#25D366;
-    color:white;
-    font-weight:bold;
+.menu-image-card img{
+width:100%;
+display:block;
+height:auto;
+max-height:620px;
+object-fit:contain;
+background:#111
 }
 
-@media(max-width:500px){
+.menu-label{
+padding:12px 14px;
+font-size:14px;
+font-weight:900;
+display:flex;
+justify-content:space-between
+}
 
-    .products{
-        grid-template-columns:1fr 1fr;
-    }
+.menu-label span{
+color:#ff6200
+}
 
-    .product{
-        padding:10px;
-    }
+/* CART */
 
-    .food{
-        height:120px;
-        font-size:50px;
-    }
+.customer-box{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:15px;
+margin-bottom:15px
+}
 
-    .product h3{
-        font-size:14px;
-    }
+.customer-box h3{
+font-size:16px;
+margin-bottom:10px
+}
 
-    .price{
-        font-size:17px;
-    }
+.customer-line{
+color:#bbb;
+font-size:13px;
+margin:5px 0;
+line-height:1.4
+}
+
+.cart-item{
+display:flex;
+gap:10px;
+align-items:center;
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.08);
+border-radius:18px;
+padding:11px;
+margin-bottom:10px
+}
+
+.cart-item-info{
+flex:1;
+min-width:0
+}
+
+.cart-item-name{
+font-size:14px;
+font-weight:800;
+line-height:1.3
+}
+
+.cart-item-price{
+color:#ff6500;
+font-size:12px;
+margin-top:4px
+}
+
+.qty-controls{
+display:flex;
+align-items:center;
+gap:7px
+}
+
+.qty-btn{
+width:30px;
+height:30px;
+border-radius:9px;
+background:#292929;
+color:#fff;
+font-size:18px;
+font-weight:bold
+}
+
+.qty-number{
+min-width:20px;
+text-align:center;
+font-weight:bold
+}
+
+.remove-btn{
+background:none;
+color:#ff4545;
+font-size:17px;
+padding:5px
+}
+
+.cart-summary{
+margin-top:18px;
+padding:18px;
+border-radius:21px;
+background:
+linear-gradient(
+145deg,
+rgba(255,80,0,.13),
+rgba(255,255,255,.04)
+);
+border:1px solid rgba(255,255,255,.09)
+}
+
+.summary-row{
+display:flex;
+justify-content:space-between;
+padding:7px 0;
+color:#bbb;
+font-size:14px
+}
+
+.summary-total{
+border-top:1px solid rgba(255,255,255,.1);
+margin-top:8px;
+padding-top:14px;
+display:flex;
+justify-content:space-between;
+font-size:20px;
+font-weight:900
+}
+
+.summary-total span:last-child{
+color:#ff6500
+}
+
+.whatsapp-btn{
+width:100%;
+padding:16px;
+margin-top:15px;
+border-radius:15px;
+background:#20c763;
+color:#fff;
+font-size:16px;
+font-weight:900
+}
+
+.empty-cart{
+text-align:center;
+padding:60px 20px;
+color:#888
+}
+
+.empty-cart .icon{
+font-size:55px;
+margin-bottom:12px
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+z-index:100;
+height:72px;
+background:rgba(12,12,12,.94);
+backdrop-filter:blur(18px);
+border-top:1px solid rgba(255,255,255,.1);
+display:flex;
+justify-content:space-around;
+align-items:center;
+padding-bottom:5px
+}
+
+.nav-btn{
+width:31%;
+height:57px;
+background:none;
+color:#777;
+border-radius:15px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:3px;
+font-size:10px;
+font-weight:bold;
+position:relative
+}
+
+.nav-btn .nav-icon{
+font-size:21px
+}
+
+.nav-btn.active{
+color:#ff6200;
+background:rgba(255,90,0,.09)
+}
+
+.nav-btn.active::after{
+content:"";
+position:absolute;
+bottom:2px;
+width:25px;
+height:3px;
+border-radius:5px;
+background:#ff6200
+}
+
+/* MODAL */
+
+.modal-bg{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(8px);
+z-index:200;
+display:flex;
+align-items:flex-end;
+justify-content:center
+}
+
+.modal{
+width:100%;
+max-width:500px;
+background:#151515;
+border-radius:28px 28px 0 0;
+padding:24px 20px 30px;
+border-top:1px solid rgba(255,255,255,.12);
+box-shadow:0 -20px 60px rgba(0,0,0,.7);
+animation:modalUp .3s ease
+}
+
+@keyframes modalUp{
+from{
+transform:translateY(100%)
+}
+to{
+transform:translateY(0)
+}
+}
+
+.modal-title{
+font-size:19px;
+font-weight:900;
+margin-bottom:5px
+}
+
+.modal-price{
+color:#ff6500;
+font-size:14px
+}
+
+.modal-qty{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:25px;
+margin:25px 0
+}
+
+.big-qty-btn{
+width:52px;
+height:52px;
+border-radius:15px;
+background:#292929;
+color:#fff;
+font-size:25px;
+font-weight:bold
+}
+
+.big-qty-number{
+font-size:28px;
+font-weight:900;
+min-width:40px;
+text-align:center
+}
+
+.modal-add{
+width:100%;
+padding:16px;
+border-radius:15px;
+background:linear-gradient(135deg,#ff7100,#d50000);
+color:#fff;
+font-size:16px;
+font-weight:900
+}
+
+.close-modal{
+width:100%;
+padding:13px;
+border-radius:14px;
+background:#282828;
+color:#bbb;
+margin-top:9px
+}
+
+/* TOAST */
+
+.toast{
+position:fixed;
+left:50%;
+bottom:88px;
+transform:translateX(-50%) translateY(20px);
+background:#202020;
+color:#fff;
+border:1px solid rgba(255,255,255,.1);
+padding:12px 17px;
+border-radius:13px;
+font-size:13px;
+z-index:300;
+opacity:0;
+pointer-events:none;
+transition:.3s;
+white-space:nowrap
+}
+
+.toast.show{
+opacity:1;
+transform:translateX(-50%) translateY(0)
+}
+
+@media(min-width:700px){
+
+.product-grid{
+grid-template-columns:repeat(3,1fr)
+}
+
+.page{
+max-width:1000px;
+margin:auto
+}
+
+.topbar{
+padding-left:calc((100% - 1000px)/2 + 15px);
+padding-right:calc((100% - 1000px)/2 + 15px)
+}
+
+.bottom-nav{
+left:50%;
+right:auto;
+width:500px;
+transform:translateX(-50%);
+border-radius:25px 25px 0 0
+}
+
+.menu-gallery{
+grid-template-columns:repeat(2,1fr)
+}
+
 }
 </style>
 </head>
 
 <body>
 
+<section id="dashboard">
 
-<!-- =================================================
-     DASHBOARD
-================================================= -->
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
 
-<div id="dashboard">
+<div class="start-card">
 
-    <div class="box">
+<div class="logo-wrap">
+<img src="al-burr-logo.png" alt="AL Burr Fast Food Logo">
+</div>
 
-        <div class="logo">
-            <img src="al-burr-logo.png" alt="AL BURR">
-        </div>
+<div class="brand">
+AL <span>BURR</span>
+</div>
 
-        <h1>AL BURR FAST FOOD</h1>
+<div class="tagline">
+Fast Food • Fresh Taste • Fast Delivery
+</div>
 
-        <div class="sub">
-            Order Your Favourite Food 🍔
-        </div>
+<div class="input-box">
+<label>Your Name</label>
+<input id="customerName" type="text" placeholder="Enter your name">
+</div>
 
-        <label>Your Name</label>
+<div class="input-box">
+<label>Phone Number</label>
+<input id="customerPhone" type="tel" placeholder="03XXXXXXXXX">
+</div>
 
-        <input
-            id="name"
-            type="text"
-            placeholder="Enter your name"
-        >
+<div class="input-box">
+<label>Delivery Address</label>
+<textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea>
+</div>
 
-        <label>Phone Number</label>
+<button class="next-btn" onclick="startApp()">
+CONTINUE →
+</button>
 
-        <input
-            id="phone"
-            type="tel"
-            placeholder="03XXXXXXXXX"
-        >
+<div class="shop-phone">
+Shop Contact: <strong>03100705273</strong>
+</div>
 
-        <label>Delivery Address</label>
+</div>
+</section>
 
-        <textarea
-            id="address"
-            placeholder="Enter your complete address"
-        ></textarea>
+<section id="app" class="hidden">
 
-        <button id="nextButton">
-            NEXT → MENU
-        </button>
+<div class="topbar">
 
-    </div>
+<div class="top-brand">
+
+<img src="al-burr-logo.png" class="top-logo" alt="AL Burr">
+
+<div>
+<div class="top-brand-text">
+AL <span>BURR</span>
+</div>
+
+<div class="shop-call">
+03100705273
+</div>
+</div>
+
+</div>
+
+<button class="cart-top" onclick="showPage('cart')">
+🛒
+<span id="cartCount" class="cart-count">0</span>
+</button>
+
+</div>
+
+<main id="homePage" class="page">
+
+<div class="welcome">
+
+<small>
+WELCOME TO AL BURR FAST FOOD
+</small>
+
+<h2 id="welcomeName">
+Welcome!
+</h2>
+
+<p>
+Apni favourite food select karein aur cart mein add karein.
+</p>
+
+<div class="call-shop">
+📞 Shop: 03100705273
+</div>
+
+</div>
+
+<div class="section-title">
+<h2>🍕 Pizza</h2>
+<span>ORDER NOW</span>
+</div>
+
+<div id="pizzaProducts" class="product-grid"></div>
+
+<div class="section-title">
+<h2>🍔 Burger</h2>
+<span>ORDER NOW</span>
+</div>
+
+<div id="burgerProducts" class="product-grid"></div>
+
+<div class="section-title">
+<h2>🌯 Shawarma</h2>
+<span>ORDER NOW</span>
+</div>
+
+<div id="shawarmaProducts" class="product-grid"></div>
+
+<div class="section-title">
+<h2>🥪 Sandwich</h2>
+<span>ORDER NOW</span>
+</div>
+
+<div id="sandwichProducts" class="product-grid"></div>
+
+<div class="section-title">
+<h2>🌯 Rolls</h2>
+<span>ORDER NOW</span>
+</div>
+
+<div id="rollProducts" class="product-grid"></div>
+
+<div class="section-title">
+<h2>🍝 Pasta</h2>
+<span>ORDER NOW</span>
+</div>
+
+<div id="pastaProducts" class="product-grid"></div>
+
+<div class="section-title">
+<h2>🍟 Fries & Snacks</h2>
+<span>ORDER NOW</span>
+</div>
+
+<div id="friesProducts" class="product-grid"></div>
+
+</main>
+<main id="menuPage" class="page hidden">
+
+<div class="section-title">
+<h2>📋 Our Menus</h2>
+<span>VIEW MENU</span>
+</div>
+
+<div class="menu-gallery">
+
+<div class="menu-image-card">
+<img src="menu-1.jpg"
+alt="AL Burr Menu 1"
+onclick="openMenuImage(this.src)">
+<div class="menu-label">
+MENU 1 <span>Tap to View</span>
+</div>
+</div>
+
+<div class="menu-image-card">
+<img src="menu-2.jpg"
+alt="AL Burr Menu 2"
+onclick="openMenuImage(this.src)">
+<div class="menu-label">
+MENU 2 <span>Tap to View</span>
+</div>
+</div>
+
+<div class="menu-image-card">
+<img src="menu-3.jpg"
+alt="AL Burr Menu 3"
+onclick="openMenuImage(this.src)">
+<div class="menu-label">
+MENU 3 <span>Tap to View</span>
+</div>
+</div>
+
+<div class="menu-image-card">
+<img src="menu-4.jpg"
+alt="AL Burr Menu 4"
+onclick="openMenuImage(this.src)">
+<div class="menu-label">
+MENU 4 <span>Tap to View</span>
+</div>
+</div>
+
+<div class="menu-image-card">
+<img src="menu-5.jpg"
+alt="AL Burr Menu 5"
+onclick="openMenuImage(this.src)">
+<div class="menu-label">
+MENU 5 <span>Tap to View</span>
+</div>
+</div>
+
+</div>
+</main>
+
+
+<!-- CART PAGE -->
+
+<main id="cartPage" class="page hidden">
+
+<div class="section-title">
+<h2>🛒 Your Cart</h2>
+<span id="cartItemsTitle">0 ITEMS</span>
+</div>
+
+<div class="customer-box">
+
+<h3>📦 Delivery Details</h3>
+
+<div class="customer-line">
+👤 <span id="cartCustomerName"></span>
+</div>
+
+<div class="customer-line">
+📞 <span id="cartCustomerPhone"></span>
+</div>
+
+<div class="customer-line">
+📍 <span id="cartCustomerAddress"></span>
+</div>
+
+</div>
+
+<div id="cartItems"></div>
+
+<div id="emptyCart" class="empty-cart">
+
+<div class="icon">🛒</div>
+
+<h3>
+Your Cart is Empty
+</h3>
+
+<p>
+Home se apni favourite food add karein.
+</p>
 
 </div>
 
 
-<!-- =================================================
-     MENU
-================================================= -->
-
-<div id="menu">
-
-    <div class="menuHead">
-
-        <div class="menuLogo">
-            <img src="al-burr-logo.png" alt="AL BURR">
-        </div>
-
-        <h2>AL BURR FAST FOOD</h2>
-
-        <p>Fresh • Hot • Delicious</p>
-
-    </div>
-
-
-    <!-- ================= PIZZA ================= -->
-
-    <div class="category">
-
-        <h2>🍕 PIZZA</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-1.jpg" alt="Special Pizza">
-                </div>
-                <h3>Special Pizza - Small</h3>
-                <div class="price">Rs. 450</div>
-                <button class="add"
-                    data-name="Special Pizza Small"
-                    data-price="450">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-1.jpg" alt="Special Pizza">
-                </div>
-                <h3>Special Pizza - Medium</h3>
-                <div class="price">Rs. 900</div>
-                <button class="add"
-                    data-name="Special Pizza Medium"
-                    data-price="900">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-1.jpg" alt="Special Pizza">
-                </div>
-                <h3>Special Pizza - Large</h3>
-                <div class="price">Rs. 1200</div>
-                <button class="add"
-                    data-name="Special Pizza Large"
-                    data-price="1200">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-1.jpg" alt="Special Pizza">
-                </div>
-                <h3>Special Pizza - XL</h3>
-                <div class="price">Rs. 1800</div>
-                <button class="add"
-                    data-name="Special Pizza XL"
-                    data-price="1800">
-                    ADD TO CART
-                </button>
-            </div>
-
-
-            <!-- NEW PIZZA -->
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-2.jpg" alt="New Pizza">
-                </div>
-                <h3>AL BURR New Pizza - Small</h3>
-                <div class="price">Rs. 350</div>
-                <button class="add"
-                    data-name="AL BURR New Pizza Small"
-                    data-price="350">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-2.jpg" alt="New Pizza">
-                </div>
-                <h3>AL BURR New Pizza - Medium</h3>
-                <div class="price">Rs. 800</div>
-                <button class="add"
-                    data-name="AL BURR New Pizza Medium"
-                    data-price="800">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-2.jpg" alt="New Pizza">
-                </div>
-                <h3>AL BURR New Pizza - Large</h3>
-                <div class="price">Rs. 1100</div>
-                <button class="add"
-                    data-name="AL BURR New Pizza Large"
-                    data-price="1100">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-2.jpg" alt="New Pizza">
-                </div>
-                <h3>AL BURR New Pizza - XL</h3>
-                <div class="price">Rs. 1600</div>
-                <button class="add"
-                    data-name="AL BURR New Pizza XL"
-                    data-price="1600">
-                    ADD TO CART
-                </button>
-            </div>
-
-
-            <!-- STUFFER PIZZA -->
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-3.jpg" alt="Stuffer Pizza">
-                </div>
-                <h3>Stuffer Pizza - Small</h3>
-                <div class="price">Rs. 500</div>
-                <button class="add"
-                    data-name="Stuffer Pizza Small"
-                    data-price="500">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-3.jpg" alt="Stuffer Pizza">
-                </div>
-                <h3>Stuffer Pizza - Medium</h3>
-                <div class="price">Rs. 950</div>
-                <button class="add"
-                    data-name="Stuffer Pizza Medium"
-                    data-price="950">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-3.jpg" alt="Stuffer Pizza">
-                </div>
-                <h3>Stuffer Pizza - Large</h3>
-                <div class="price">Rs. 1250</div>
-                <button class="add"
-                    data-name="Stuffer Pizza Large"
-                    data-price="1250">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-3.jpg" alt="Stuffer Pizza">
-                </div>
-                <h3>Stuffer Pizza - XL</h3>
-                <div class="price">Rs. 1800</div>
-                <button class="add"
-                    data-name="Stuffer Pizza XL"
-                    data-price="1800">
-                    ADD TO CART
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- ================= BURGER ================= -->
-
-    <div class="category">
-
-        <h2>🍔 BURGER</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-4.jpg" alt="Burger">
-                </div>
-                <h3>Zinger Burger</h3>
-                <div class="price">Rs. 350</div>
-                <button class="add"
-                    data-name="Zinger Burger"
-                    data-price="350">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-4.jpg" alt="Burger">
-                </div>
-                <h3>AL Burr Special Burger</h3>
-                <div class="price">Rs. 300</div>
-                <button class="add"
-                    data-name="AL Burr Special Burger"
-                    data-price="300">
-                    ADD TO CART
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- ================= SHAWARMA ================= -->
-
-    <div class="category">
-
-        <h2>🌯 SHAWARMA</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-4.jpg" alt="Shawarma">
-                </div>
-                <h3>Chicken Shawarma</h3>
-                <div class="price">Rs. 150</div>
-                <button class="add"
-                    data-name="Chicken Shawarma"
-                    data-price="150">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-4.jpg" alt="Shawarma">
-                </div>
-                <h3>Zinger Shawarma</h3>
-                <div class="price">Rs. 200</div>
-                <button class="add"
-                    data-name="Zinger Shawarma"
-                    data-price="200">
-                    ADD TO CART
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- ================= SANDWICH ================= -->
-
-    <div class="category">
-
-        <h2>🥪 SANDWICH</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-5.jpg" alt="Sandwich">
-                </div>
-                <h3>Chicken Sandwich</h3>
-                <div class="price">Rs. 250</div>
-                <button class="add"
-                    data-name="Chicken Sandwich"
-                    data-price="250">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-5.jpg" alt="Sandwich">
-                </div>
-                <h3>Club Sandwich</h3>
-                <div class="price">Rs. 250</div>
-                <button class="add"
-                    data-name="Club Sandwich"
-                    data-price="250">
-                    ADD TO CART
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- ================= ROLLS ================= -->
-
-    <div class="category">
-
-        <h2>🌯 ROLLS</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-5.jpg" alt="Roll">
-                </div>
-                <h3>Chicken Roll</h3>
-                <div class="price">Rs. 180</div>
-                <button class="add"
-                    data-name="Chicken Roll"
-                    data-price="180">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-5.jpg" alt="Roll">
-                </div>
-                <h3>Zinger Roll</h3>
-                <div class="price">Rs. 220</div>
-                <button class="add"
-                    data-name="Zinger Roll"
-                    data-price="220">
-                    ADD TO CART
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- ================= PASTA ================= -->
-
-    <div class="category">
-
-        <h2>🍝 PASTA</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-3.jpg" alt="Pasta">
-                </div>
-                <h3>Chicken Pasta</h3>
-                <div class="price">Rs. 350</div>
-                <button class="add"
-                    data-name="Chicken Pasta"
-                    data-price="350">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-3.jpg" alt="Pasta">
-                </div>
-                <h3>Special Pasta</h3>
-                <div class="price">Rs. 400</div>
-                <button class="add"
-                    data-name="Special Pasta"
-                    data-price="400">
-                    ADD TO CART
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- ================= FRIES ================= -->
-
-    <div class="category">
-
-        <h2>🍟 FRIES & SNACKS</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-5.jpg" alt="Fries">
-                </div>
-                <h3>French Fries</h3>
-                <div class="price">Rs. 180</div>
-                <button class="add"
-                    data-name="French Fries"
-                    data-price="180">
-                    ADD TO CART
-                </button>
-            </div>
-
-            <div class="product">
-                <div class="food">
-                    <img src="menu-5.jpg" alt="Snacks">
-                </div>
-                <h3>Loaded Fries</h3>
-                <div class="price">Rs. 300</div>
-                <button class="add"
-                    data-name="Loaded Fries"
-                    data-price="300">
-                    ADD TO CART
-                </button>
-            </div>
-
-        </div>
-    </div>
+<div id="cartSummary" class="cart-summary hidden">
+
+<div class="summary-row">
+<span>Items</span>
+<span id="summaryItems">0</span>
+</div>
+
+<div class="summary-row">
+<span>Subtotal</span>
+<span>
+Rs. <span id="summarySubtotal">0</span>
+</span>
+</div>
+
+<div class="summary-row">
+<span>Delivery</span>
+<span>Rs. 0</span>
+</div>
+
+<div class="summary-total">
+<span>Total</span>
+<span>
+Rs. <span id="summaryTotal">0</span>
+</span>
+</div>
+
+<button
+class="whatsapp-btn"
+onclick="sendWhatsAppOrder()">
+💬 ORDER ON WHATSAPP
+</button>
+
+</div>
+
+</main>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom-nav">
+
+<button
+id="navHome"
+class="nav-btn active"
+onclick="showPage('home')">
+
+<span class="nav-icon">🏠</span>
+HOME
+
+</button>
+
+
+<button
+id="navMenus"
+class="nav-btn"
+onclick="showPage('menus')">
+
+<span class="nav-icon">📋</span>
+MENUS
+
+</button>
+
+
+<button
+id="navCart"
+class="nav-btn"
+onclick="showPage('cart')">
+
+<span class="nav-icon">🛒</span>
+CART
+
+</button>
+
+</nav>
+
+</section>
+
+
+<!-- QUANTITY MODAL -->
+
+<div
+id="quantityModal"
+class="modal-bg hidden">
+
+<div class="modal">
+
+<div
+id="modalProductName"
+class="modal-title">
+Product
+</div>
+
+<div
+id="modalProductPrice"
+class="modal-price">
+Rs. 0
+</div>
+
+
+<div class="modal-qty">
+
+<button
+class="big-qty-btn"
+onclick="changeModalQty(-1)">
+−
+</button>
+
+<div
+id="modalQty"
+class="big-qty-number">
+1
+</div>
+
+<button
+class="big-qty-btn"
+onclick="changeModalQty(1)">
++
+</button>
 
 </div>
 
 
-<!-- =================================================
-     CART
-================================================= -->
+<button
+class="modal-add"
+onclick="addSelectedProduct()">
+ADD TO CART
+</button>
 
-<div id="cart">
 
-    <b>🛒 CART</b>
+<button
+class="close-modal"
+onclick="closeQuantityModal()">
+CANCEL
+</button>
 
-    <div id="cartItems"></div>
+</div>
 
-    <div>
-        <b>Total: Rs. <span id="total">0</span></b>
-    </div>
+</div>
 
-    <button id="orderButton">
-        ORDER NOW → WHATSAPP
-    </button>
 
+<!-- LARGE MENU IMAGE -->
+
+<div
+id="menuImageModal"
+class="modal-bg hidden"
+onclick="closeMenuImage()">
+
+<div
+style="
+width:95%;
+max-width:600px;
+max-height:90vh;
+display:flex;
+align-items:center;
+justify-content:center
+"
+onclick="event.stopPropagation()">
+
+<img
+id="largeMenuImage"
+src=""
+alt="Menu"
+style="
+max-width:100%;
+max-height:88vh;
+object-fit:contain;
+border-radius:18px;
+box-shadow:0 20px 60px rgba(0,0,0,.8)
+">
+
+</div>
+
+</div>
+
+
+<!-- TOAST MESSAGE -->
+
+<div
+id="toast"
+class="toast">
 </div>
 
 
 <script>
 
-/* ================= CUSTOMER DATA ================= */
+const products = [
 
-let customerName = "";
-let customerPhone = "";
-let customerAddress = "";
+/* =========================
+   PIZZA
+========================= */
 
+{
+id:"pizza-special-small",
+name:"Special Pizza - Small",
+price:450,
+cat:"pizza",
+image:"menu-1.jpg",
+badge:"SMALL"
+},
 
-/* ================= NEXT BUTTON ================= */
+{
+id:"pizza-special-medium",
+name:"Special Pizza - Medium",
+price:900,
+cat:"pizza",
+image:"menu-1.jpg",
+badge:"MEDIUM"
+},
 
-document
-.getElementById("nextButton")
-.addEventListener("click", function(){
+{
+id:"pizza-special-large",
+name:"Special Pizza - Large",
+price:1200,
+cat:"pizza",
+image:"menu-1.jpg",
+badge:"LARGE"
+},
 
-    customerName =
-        document.getElementById("name").value.trim();
-
-    customerPhone =
-        document.getElementById("phone").value.trim();
-
-    customerAddress =
-        document.getElementById("address").value.trim();
-
-    if(
-        customerName === "" ||
-        customerPhone === "" ||
-        customerAddress === ""
-    ){
-
-        alert(
-            "Please enter Name, Phone Number and Address."
-        );
-
-        return;
-    }
-
-    document
-    .getElementById("dashboard")
-    .style.display = "none";
-
-    document
-    .getElementById("menu")
-    .style.display = "block";
-
-    window.scrollTo(0,0);
-
-});
+{
+id:"pizza-special-xl",
+name:"Special Pizza - XL",
+price:1800,
+cat:"pizza",
+image:"menu-1.jpg",
+badge:"XL"
+},
 
 
-/* ================= CART ================= */
+/* AL BURR NEW PIZZA */
+
+{
+id:"pizza-new-small",
+name:"AL BURR New Pizza - Small",
+price:350,
+cat:"pizza",
+image:"menu-2.jpg",
+badge:"SMALL"
+},
+
+{
+id:"pizza-new-medium",
+name:"AL BURR New Pizza - Medium",
+price:800,
+cat:"pizza",
+image:"menu-2.jpg",
+badge:"MEDIUM"
+},
+
+{
+id:"pizza-new-large",
+name:"AL BURR New Pizza - Large",
+price:1100,
+cat:"pizza",
+image:"menu-2.jpg",
+badge:"LARGE"
+},
+
+{
+id:"pizza-new-xl",
+name:"AL BURR New Pizza - XL",
+price:1600,
+cat:"pizza",
+image:"menu-2.jpg",
+badge:"XL"
+},
+
+
+/* STUFFER PIZZA */
+
+{
+id:"pizza-stuffer-small",
+name:"Stuffer Pizza - Small",
+price:500,
+cat:"pizza",
+image:"menu-3.jpg",
+badge:"SMALL"
+},
+
+{
+id:"pizza-stuffer-medium",
+name:"Stuffer Pizza - Medium",
+price:950,
+cat:"pizza",
+image:"menu-3.jpg",
+badge:"MEDIUM"
+},
+
+{
+id:"pizza-stuffer-large",
+name:"Stuffer Pizza - Large",
+price:1250,
+cat:"pizza",
+image:"menu-3.jpg",
+badge:"LARGE"
+},
+
+{
+id:"pizza-stuffer-xl",
+name:"Stuffer Pizza - XL",
+price:1800,
+cat:"pizza",
+image:"menu-3.jpg",
+badge:"XL"
+},
+
+
+/* =========================
+   BURGER
+========================= */
+
+{
+id:"zinger-burger",
+name:"Zinger Burger",
+price:350,
+cat:"burger",
+image:"menu-4.jpg"
+},
+
+{
+id:"special-burger",
+name:"AL Burr Special Burger",
+price:300,
+cat:"burger",
+image:"menu-4.jpg"
+},
+
+
+/* =========================
+   SHAWARMA
+========================= */
+
+{
+id:"chicken-shawarma",
+name:"Chicken Shawarma",
+price:150,
+cat:"shawarma",
+image:"menu-4.jpg"
+},
+
+{
+id:"zinger-shawarma",
+name:"Zinger Shawarma",
+price:200,
+cat:"shawarma",
+image:"menu-4.jpg"
+},
+
+
+/* =========================
+   SANDWICH
+========================= */
+
+{
+id:"chicken-sandwich",
+name:"Chicken Sandwich",
+price:250,
+cat:"sandwich",
+image:"menu-5.jpg"
+},
+
+{
+id:"club-sandwich",
+name:"Club Sandwich",
+price:250,
+cat:"sandwich",
+image:"menu-5.jpg"
+},
+
+
+/* =========================
+   ROLLS
+========================= */
+
+{
+id:"chicken-roll",
+name:"Chicken Roll",
+price:180,
+cat:"roll",
+image:"menu-5.jpg"
+},
+
+{
+id:"zinger-roll",
+name:"Zinger Roll",
+price:220,
+cat:"roll",
+image:"menu-5.jpg"
+},
+
+
+/* =========================
+   PASTA
+========================= */
+
+{
+id:"chicken-pasta",
+name:"Chicken Pasta",
+price:350,
+cat:"pasta",
+image:"menu-5.jpg"
+},
+
+{
+id:"special-pasta",
+name:"Special Pasta",
+price:400,
+cat:"pasta",
+image:"menu-5.jpg"
+},
+
+
+/* =========================
+   FRIES
+========================= */
+
+{
+id:"french-fries",
+name:"French Fries",
+price:180,
+cat:"fries",
+image:"menu-5.jpg"
+},
+
+{
+id:"loaded-fries",
+name:"Loaded Fries",
+price:300,
+cat:"fries",
+image:"menu-5.jpg"
+}
+
+];
+
 
 let cart = [];
 
+let selectedProduct = null;
+
+let modalQuantity = 1;
+
+let customer = {
+name:"",
+phone:"",
+address:""
+};
+
+
+/* =========================
+   START APP
+========================= */
+
+function startApp(){
+
+const name =
+document.getElementById("customerName")
+.value.trim();
+
+const phone =
+document.getElementById("customerPhone")
+.value.trim();
+
+const address =
+document.getElementById("customerAddress")
+.value.trim();
+
+
+if(!name){
+showToast("Please enter your name");
+return;
+}
+
+if(!phone){
+showToast("Please enter your phone number");
+return;
+}
+
+if(!address){
+showToast("Please enter delivery address");
+return;
+}
+
+
+customer = {
+name:name,
+phone:phone,
+address:address
+};
+
+
+document.getElementById("welcomeName")
+.textContent =
+"Welcome, " + name + "!";
+
+
+document.getElementById("cartCustomerName")
+.textContent = name;
+
+document.getElementById("cartCustomerPhone")
+.textContent = phone;
+
+document.getElementById("cartCustomerAddress")
+.textContent = address;
+
+
+document.getElementById("dashboard")
+.classList.add("hidden");
+
+
+document.getElementById("app")
+.classList.remove("hidden");
+
+
+showPage("home");
+
+}
+
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
+
+function renderProducts(){
+
+const containers = {
+
+pizza:"pizzaProducts",
+
+burger:"burgerProducts",
+
+shawarma:"shawarmaProducts",
+
+sandwich:"sandwichProducts",
+
+roll:"rollProducts",
+
+pasta:"pastaProducts",
+
+fries:"friesProducts"
+
+};
+
+
+Object.values(containers)
+.forEach(id=>{
+document.getElementById(id)
+.innerHTML="";
+});
+
+
+products.forEach(product=>{
+
+const container =
+document.getElementById(
+containers[product.cat]
+);
+
+if(!container) return;
+
+
+const card =
+document.createElement("div");
+
+card.className = "product";
+
+
+card.innerHTML = `
+
+${
+product.badge
+?
+`<div class="size-badge">
+${product.badge}
+</div>`
+:
+""
+}
+
+<img
+class="product-img"
+src="${product.image}"
+alt="${product.name}"
+loading="lazy"
+>
+
+<div class="product-content">
+
+<div class="product-name">
+${product.name}
+</div>
+
+<div class="product-price">
+Rs. ${product.price}
+</div>
+
+<button
+class="add-btn"
+onclick="event.stopPropagation();
+openQuantityModal('${product.id}')">
+
++ ADD TO CART
+
+</button>
+
+</div>
+
+`;
+
+
+card.onclick = () =>
+openQuantityModal(product.id);
+
+
+container.appendChild(card);
+
+});
+
+}
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(page){
 
 document
-.querySelectorAll(".add")
-.forEach(function(button){
+.getElementById("homePage")
+.classList.add("hidden");
 
-    button.addEventListener("click", function(){
+document
+.getElementById("menuPage")
+.classList.add("hidden");
 
-        let name =
-            button.getAttribute("data-name");
+document
+.getElementById("cartPage")
+.classList.add("hidden");
 
-        let price =
-            Number(button.getAttribute("data-price"));
 
-        cart.push({
-            name:name,
-            price:price
-        });
+document
+.getElementById("navHome")
+.classList.remove("active");
 
-        updateCart();
+document
+.getElementById("navMenus")
+.classList.remove("active");
 
-    });
+document
+.getElementById("navCart")
+.classList.remove("active");
+
+
+if(page === "home"){
+
+document
+.getElementById("homePage")
+.classList.remove("hidden");
+
+document
+.getElementById("navHome")
+.classList.add("active");
+
+}
+
+
+if(page === "menus"){
+
+document
+.getElementById("menuPage")
+.classList.remove("hidden");
+
+document
+.getElementById("navMenus")
+.classList.add("active");
+
+}
+
+
+if(page === "cart"){
+
+document
+.getElementById("cartPage")
+.classList.remove("hidden");
+
+document
+.getElementById("navCart")
+.classList.add("active");
+
+renderCart();
+
+}
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+   QUANTITY MODAL
+========================= */
+
+function openQuantityModal(productId){
+
+selectedProduct =
+products.find(
+product => product.id === productId
+);
+
+if(!selectedProduct) return;
+
+
+modalQuantity = 1;
+
+
+document.getElementById(
+"modalProductName"
+).textContent =
+selectedProduct.name;
+
+
+document.getElementById(
+"modalProductPrice"
+).textContent =
+"Rs. " + selectedProduct.price;
+
+
+document.getElementById(
+"modalQty"
+).textContent =
+modalQuantity;
+
+
+document.getElementById(
+"quantityModal"
+).classList.remove("hidden");
+
+}
+
+
+function changeModalQty(change){
+
+modalQuantity += change;
+
+
+if(modalQuantity < 1)
+modalQuantity = 1;
+
+
+if(modalQuantity > 20)
+modalQuantity = 20;
+
+
+document.getElementById(
+"modalQty"
+).textContent =
+modalQuantity;
+
+}
+
+
+function closeQuantityModal(){
+
+document.getElementById(
+"quantityModal"
+).classList.add("hidden");
+
+selectedProduct = null;
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addSelectedProduct(){
+
+if(!selectedProduct) return;
+
+
+const existing =
+cart.find(
+item => item.id === selectedProduct.id
+);
+
+
+if(existing){
+
+existing.quantity += modalQuantity;
+
+}else{
+
+cart.push({
+
+id:selectedProduct.id,
+
+name:selectedProduct.name,
+
+price:selectedProduct.price,
+
+image:selectedProduct.image,
+
+quantity:modalQuantity
+
+});
+
+}
+
+
+const productName =
+selectedProduct.name;
+
+
+closeQuantityModal();
+
+updateCartCount();
+
+showToast(
+productName + " added to cart"
+);
+
+}
+
+
+/* =========================
+   CART COUNT
+========================= */
+
+function updateCartCount(){
+
+document.getElementById(
+"cartCount"
+).textContent =
+cart.reduce(
+(total,item) =>
+total + item.quantity,
+0
+);
+
+}
+
+
+/* =========================
+   RENDER CART
+========================= */
+
+function renderCart(){
+
+const container =
+document.getElementById("cartItems");
+
+const empty =
+document.getElementById("emptyCart");
+
+const summary =
+document.getElementById("cartSummary");
+
+
+if(cart.length === 0){
+
+container.innerHTML = "";
+
+empty.classList.remove("hidden");
+
+summary.classList.add("hidden");
+
+document.getElementById(
+"cartItemsTitle"
+).textContent =
+"0 ITEMS";
+
+return;
+
+}
+
+
+empty.classList.add("hidden");
+
+summary.classList.remove("hidden");
+
+container.innerHTML = "";
+
+
+let totalItems = 0;
+
+let subtotal = 0;
+
+
+cart.forEach(item=>{
+
+totalItems += item.quantity;
+
+subtotal +=
+item.price * item.quantity;
+
+
+const div =
+document.createElement("div");
+
+div.className = "cart-item";
+
+
+div.innerHTML = `
+
+<img
+src="${item.image}"
+style="
+width:58px;
+height:58px;
+object-fit:cover;
+border-radius:13px;
+background:#111
+"
+alt="${item.name}"
+>
+
+<div class="cart-item-info">
+
+<div class="cart-item-name">
+${item.name}
+</div>
+
+<div class="cart-item-price">
+Rs. ${item.price} each
+</div>
+
+</div>
+
+
+<div class="qty-controls">
+
+<button
+class="qty-btn"
+onclick="changeCartQty('${item.id}',-1)">
+−
+</button>
+
+<div class="qty-number">
+${item.quantity}
+</div>
+
+<button
+class="qty-btn"
+onclick="changeCartQty('${item.id}',1)">
++
+</button>
+
+</div>
+
+
+<button
+class="remove-btn"
+onclick="removeFromCart('${item.id}')">
+🗑️
+</button>
+
+`;
+
+
+container.appendChild(div);
 
 });
 
 
-function updateCart(){
-
-    let cartBox =
-        document.getElementById("cart");
-
-    let itemsBox =
-        document.getElementById("cartItems");
-
-    let totalBox =
-        document.getElementById("total");
-
-    if(cart.length === 0){
-
-        cartBox.style.display = "none";
-
-        return;
-    }
-
-    cartBox.style.display = "block";
-
-    itemsBox.innerHTML = "";
-
-    let total = 0;
-
-            cart.forEach(function(item){
-
-            total += item.price;
-
-            let row =
-                document.createElement("div");
-
-            row.className = "cartRow";
-
-            row.innerHTML =
-                item.name + " — Rs. " + item.price;
-
-            itemsBox.appendChild(row);
-
-        });
-
-        totalBox.textContent = total;
-    }
+document.getElementById(
+"cartItemsTitle"
+).textContent =
+totalItems + " ITEMS";
 
 
-/* ================= WHATSAPP ORDER ================= */
+document.getElementById(
+"summaryItems"
+).textContent =
+totalItems;
 
-document
-.getElementById("orderButton")
-.addEventListener("click", function(){
 
-    if(cart.length === 0){
+document.getElementById(
+"summarySubtotal"
+).textContent =
+subtotal;
 
-        alert("Please add something to cart.");
 
-        return;
-    }
+document.getElementById(
+"summaryTotal"
+).textContent =
+subtotal;
 
-    let total = 0;
+}
 
-    let message =
-        "AL BURR FAST FOOD ORDER%0A%0A";
 
-    message +=
-        "Name: " + customerName + "%0A";
+/* =========================
+   CART QUANTITY
+========================= */
 
-    message +=
-        "Phone: " + customerPhone + "%0A";
+function changeCartQty(id,change){
 
-    message +=
-        "Address: " + customerAddress + "%0A%0A";
+const item =
+cart.find(
+product => product.id === id
+);
 
-    message +=
-        "ORDER:%0A";
+if(!item) return;
 
-    cart.forEach(function(item){
 
-        message +=
-            "- " +
-            item.name +
-            " — Rs. " +
-            item.price +
-            "%0A";
+item.quantity += change;
 
-        total += item.price;
 
-    });
+if(item.quantity <= 0){
 
-    message +=
-        "%0ATotal: Rs. " + total;
+cart =
+cart.filter(
+product => product.id !== id
+);
 
-    let whatsappNumber =
-        "923070000166";
+}
 
-    let whatsappURL =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        message;
 
-    window.open(
-        whatsappURL,
-        "_blank"
-    );
+updateCartCount();
+
+renderCart();
+
+}
+
+
+function removeFromCart(id){
+
+cart =
+cart.filter(
+item => item.id !== id
+);
+
+updateCartCount();
+
+renderCart();
+
+showToast("Item removed");
+
+}
+
+
+/* =========================
+   WHATSAPP ORDER
+========================= */
+
+function sendWhatsAppOrder(){
+
+if(cart.length === 0){
+
+showToast("Your cart is empty");
+
+return;
+
+}
+
+const whatsappNumber =
+"923070000166";
+
+
+let message =
+"🍔 *AL BURR FAST FOOD ORDER*\n\n";
+
+
+message +=
+"👤 *Name:* " +
+customer.name +
+"\n";
+
+
+message +=
+"📞 *Phone:* " +
+customer.phone +
+"\n";
+
+
+message +=
+"📍 *Address:* " +
+customer.address +
+"\n\n";
+
+
+message +=
+"🛒 *ORDER DETAILS*\n";
+
+message +=
+"--------------------\n";
+
+
+let total = 0;
+
+
+cart.forEach(item=>{
+
+const itemTotal =
+item.price * item.quantity;
+
+total += itemTotal;
+
+
+message +=
+"• " +
+item.name +
+" x " +
+item.quantity +
+" = Rs. " +
+itemTotal +
+"\n";
 
 });
-</script>
+
+
+message +=
+"--------------------\n";
+
+message +=
+"💰 *TOTAL: Rs. " +
+total +
+"*\n\n";
+
+message +=
+"Please confirm my order. Thank you!";
+
+
+window.open(
+"https://wa.me/" +
+whatsappNumber +
+"?text=" +
+encodeURIComponent(message),
+"_blank"
+);
+
+}
+
+
+/* =========================
+   MENU IMAGE VIEW
+========================= */
+
+function openMenuImage(src){
+
+document.getElementById(
+"largeMenuImage"
+).src = src;
+
+
+document.getElementById(
+"menuImageModal"
+).classList.remove("hidden");
+
+}
+
+
+function closeMenuImage(){
+
+document.getElementById(
+"menuImageModal"
+).classList.add("hidden");
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer;
+
+
+function showToast(message){
+
+const toast =
+document.getElementById("toast");
+
+
+toast.textContent =
+message;
+
+
+toast.classList.add("show");
+
+
+clearTimeout(toastTimer);
+
+
+toastTimer =
+setTimeout(
+()=>{
+toast.classList.remove("show");
+},
+2200
+);
+
+}
+
+
+/* START */
+
+renderProducts();
+
+    </script>
+    </script>
 
 </body>
 </html>
