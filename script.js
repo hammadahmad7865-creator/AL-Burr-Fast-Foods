@@ -1297,5 +1297,54 @@ function placeWhatsAppOrder() {
 
     window.open(url, "_blank");
 }
+function openMenuImage(imageName) {
+
+    const modal =
+        document.getElementById("imageModal");
+
+    const image =
+        document.getElementById("largeMenuImage");
+
+    image.src = imageName;
+
+    modal.style.display = "flex";
+}
+
+
+function closeMenuImage() {
+
+    document.getElementById(
+        "imageModal"
+    ).style.display = "none";
+}
+
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function () {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        renderProducts();
+
+        updateCartCount();
+
+        renderCart();
+
+    }
+);
 
            
