@@ -414,22 +414,34 @@ function startOrdering() {
         .getElementById("cartCustomerAddress")
         .textContent =
         customer.address;
+function startOrdering() {
 
+    const name =
+        document.getElementById("customerName").value.trim();
 
-    document
-        .getElementById("welcomeScreen")
-        .style.display =
-        "none";
+    const phone =
+        document.getElementById("customerPhone").value.trim();
 
+    const address =
+        document.getElementById("customerAddress").value.trim();
 
-    document
-        .getElementById("mainApp")
-        .style.display =
-        "block";
+    if (!name || !phone || !address) {
+        showToast("Please fill all details");
+        return;
+    }
 
+    customer.name = name;
+    customer.phone = phone;
+    customer.address = address;
+
+    document.getElementById("cartCustomerName").textContent = name;
+    document.getElementById("cartCustomerPhone").textContent = phone;
+    document.getElementById("cartCustomerAddress").textContent = address;
+
+    document.getElementById("welcomeScreen").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
 
     showPage("home");
-
 }
 
 
