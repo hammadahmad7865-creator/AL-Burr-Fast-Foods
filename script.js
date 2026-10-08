@@ -451,99 +451,99 @@ function startOrdering() {
 
 function showPage(pageName) {
 
-    const pages = {
-
-        home: "homePage",
-
-        menu: "menuPage",
-
-        cart: "cartPage"
-
-    };
-
-
-    Object.values(pages).forEach(
-        function(pageId) {
-
-            const page =
-                document.getElementById(
-                    pageId
-                );
-
-            if (page) {
-
-                page.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-
-    const selectedPage =
-        document.getElementById(
-            pages[pageName]
-        );
-
-
-    if (selectedPage) {
-
-        selectedPage.classList.add(
-            "active"
-        );
-
-    }
-
-
-    document
-        .querySelectorAll(".nav-button")
-        .forEach(
-            function(button) {
-
-                button.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    if (pageName === "home") {
-
-        document
-            .getElementById("navHome")
-            .classList.add("active");
-
-    }
-
-
-    if (pageName === "menu") {
-
-        document
-            .getElementById("navMenu")
-            .classList.add("active");
-
-    }
-
-
-    if (pageName === "cart") {
-
-        document
-            .getElementById("navCart")
-            .classList.add("active");
-
-        renderCart();
-
-    }
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
     });
 
+    const page = document.getElementById(pageName + "Page");
+
+    if (page) {
+        page.classList.add("active");
+    }
+
+    document.querySelectorAll(".bottom-nav button").forEach(function(btn) {
+        btn.classList.remove("active");
+    });
+
+    if (pageName === "home") {
+        document.getElementById("navHome").classList.add("active");
+    }
+
+    if (pageName === "menu") {
+        document.getElementById("navMenu").classList.add("active");
+    }
+
+    if (pageName === "cart") {
+        document.getElementById("navCart").classList.add("active");
+        renderCart();
+    }
+
+    window.scrollTo(0, 0);
+}
+   function openQuantityModal(id) {
+
+    selectedProduct = products.find(function(product) {
+        return product.id === id;
+    });
+
+    if (!selectedProduct) return;
+
+    modalQuantity = 1;
+
+    document.getElementById("modalProductName").textContent =
+        selectedProduct.name;
+
+    document.getElementById("modalProductPrice").textContent =
+        "Rs. " + selectedProduct.price;
+
+    document.getElementById("modalQuantity").textContent =
+        modalQuantity;
+
+    document.getElementById("quantityModal").style.display = "flex";
+}
+
+
+function changeModalQuantity(change) {
+
+    modalQuantity += change;
+
+    if (modalQuantity < 1) {
+        modalQuantity = 1;
+    }
+
+    document.getElementById("modalQuantity").textContent =
+        modalQuantity;
+}
+
+
+function closeQuantityModal() {
+
+    document.getElementById("quantityModal").style.display = "none";
+}
+
+
+function addSelectedToCart() {
+
+    if (!selectedProduct) return;
+
+    const existing = cart.find(function(item) {
+        return item.id === selectedProduct.id;
+    });
+
+    if (existing) {
+        existing.quantity += modalQuantity;
+    } else {
+        cart.push({
+            ...selectedProduct,
+            quantity: modalQuantity
+        });
+    }
+
+    updateCartCount();
+    renderCart();
+    closeQuantityModal();
+
+    showToast("Added to Cart ✓");
 }
 
 
