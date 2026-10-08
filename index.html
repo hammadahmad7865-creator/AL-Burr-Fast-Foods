@@ -17,6 +17,68 @@
 ================================ -->
 
 <script>
+      const TRIAL_API =
+"https://script.google.com/macros/s/AKfycbz039VE5L6EOhrPZnOKSV9sz41b5lLjsEX6zx-BmY9i_FRfkLQvWVtNwJiD1Vnw3BWO/exec";
+
+function activateTrial() {
+
+    const input = document.getElementById("trialCode");
+    const status = document.getElementById("trialStatus");
+
+    const code = input.value.trim();
+
+    if (!code) {
+        status.innerHTML = "❌ Trial Code لکھیں";
+        return;
+    }
+
+    status.innerHTML = "⏳ Checking...";
+
+    const script = document.createElement("script");
+
+    const callbackName =
+        "trialCallback_" + Date.now();
+
+    window[callbackName] = function(data) {
+
+        if (data.ok && data.status === "active") {
+
+            localStorage.setItem("alBurrTrialCode", code);
+
+            status.innerHTML =
+                "✅ Trial Active — " +
+                data.remainingDays +
+                " دن باقی ہیں";
+
+        } else if (data.status === "expired") {
+
+            status.innerHTML =
+                "❌ آپ کا 7-Day Trial ختم ہو چکا ہے۔";
+
+        } else if (data.status === "invalid_code") {
+
+            status.innerHTML =
+                "❌ غلط Trial Code";
+
+        } else {
+
+            status.innerHTML =
+                "❌ Trial activate نہیں ہو سکا۔";
+        }
+
+        document.body.removeChild(script);
+        delete window[callbackName];
+    };
+
+    script.src =
+        TRIAL_API +
+        "?action=activate&code=" +
+        encodeURIComponent(code) +
+        "&callback=" +
+        callbackName;
+
+    document.body.appendChild(script);
+}
 
 const CONTROL_URL = "./control.json";
 
