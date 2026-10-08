@@ -1359,4 +1359,41 @@ document.addEventListener(
     }
 );
 
+function renderProducts() {
+
+    products.forEach(function(product) {
+
+        const container =
+            document.getElementById(
+                categoryContainers[product.cat]
+            );
+
+        if (!container) return;
+
+        const card =
+            document.createElement("div");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <img src="${product.image}">
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                ${
+                    product.size
+                    ? `<p>${product.size}</p>`
+                    : ""
+                }
+                <strong>Rs. ${product.price}</strong>
+                <button
+                    onclick="openQuantityModal('${product.id}')">
+                    Add to Cart
+                </button>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
            
