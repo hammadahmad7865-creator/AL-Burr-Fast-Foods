@@ -5577,65 +5577,6 @@ function openCart() {
 }
 
 
-/* =========================================
-   START APP + CHECK SAVED TRIAL
-========================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        renderProducts();
-
-
-        updateCartCount();
-
-
-        verifyTrial(
-            function(
-                trialActive,
-                trialStatus
-            ) {
-
-                const trialBox =
-                    document.getElementById(
-                        "trialBox"
-                    );
-
-
-                if (trialActive) {
-
-                    if (trialBox) {
-
-                        trialBox.style.display =
-                            "none";
-
-                    }
-
-                }
-
-                else {
-
-                    if (trialBox) {
-
-                        trialBox.style.display =
-                            "block";
-
-                    }
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================
-   END
-========================================= */
-
 </script>
 
 
