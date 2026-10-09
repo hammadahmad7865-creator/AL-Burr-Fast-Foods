@@ -1396,4 +1396,23 @@ function renderProducts() {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".product-card button").forEach(function(btn) {
+        btn.style.background = "linear-gradient(135deg,#ff8a00,#ff4b00)";
+        btn.style.color = "#fff";
+    });
+
+    const modal = document.getElementById("quantityModal");
+
+    if (modal) {
+        modal.addEventListener("click", function(e) {
+            if (e.target === modal) {
+                closeQuantityModal();
+            }
+        });
+    }
+
+});
+
            
